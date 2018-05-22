@@ -27,6 +27,13 @@ class LinkedList:
                 return p
         return None
 
+    def remove(self, p):
+        if not (p and p.next):
+            return False
+        p.data = p.next.data
+        p.next = p.next.next
+        return True
+
 
     def __str__(self):
         _head = self.head
