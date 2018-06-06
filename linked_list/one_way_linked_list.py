@@ -5,8 +5,10 @@ class Node:
 
 
 class LinkedList:
-    def __init__(self):
+    def __init__(self, list):
         self.head = None
+        for i in reversed(list):
+            self.add(i)
 
     def add(self, data):
         node = Node(data)
@@ -15,6 +17,16 @@ class LinkedList:
         else:
             node.next = self.head
             self.head = node
+
+    def push(self, node):
+        p = self.head
+        if p is not None:
+            while p.next:
+                p = p.next
+            p.next = node
+        else:
+            self.head = node
+
 
     def search(self, k):
         p = self.head

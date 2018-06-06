@@ -10,21 +10,23 @@ def polyndrome(a):
         >>> polyndrome([2,2,6,6,2,2,2,2,6,6,2,2])
         True
         """
-        N = len(a)
-        l = LinkedList()
+        l = LinkedList(a)
         stack = []
-        for i in reversed(a):
-            l.add(i)
-        node = l.head
-        while len(stack) < N // 2:
-            stack.append(node.data)
-            node = node.next
-        if N % 2 == 1:
-            node = node.next
-        while node:
-            if stack.pop() != node.data:
+        fast = l.head
+        slow = l.head
+        while fast:
+            if not fast.next:
+                slow = slow.next
+                break
+            else:
+                fast = fast.next.next
+            stack.append(slow.data)
+            slow = slow.next
+
+        while slow:
+            if stack.pop() != slow.data:
                 return False
-            node = node.next
+            slow = slow.next
         return True
 if __name__ == '__main__':
         doctest.testmod()
